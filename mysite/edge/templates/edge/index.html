@@ -1,0 +1,9 @@
+ {% if latest_character_list %}
+    <ul>
+    {% for character in latest_character_list %}
+        <li><a href="/edge/characters/{{ character.id }}/">{{ character.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No characters are available.</p>
+{% endif %}
