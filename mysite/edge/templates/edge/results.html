@@ -1,0 +1,9 @@
+{% if resultsList %}
+   <ul>
+   {% for result in ResultsList %}
+       <li><a href="/edge/dice/{{ result.id }}/">{{ diceResults.result }}</a></li>
+   {% endfor %}
+   </ul>
+{% else %}
+   <p>No results are available.</p>
+{% endif %}

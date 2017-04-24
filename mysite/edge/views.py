@@ -5,6 +5,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from .forms import CharacterForm
 from .models import Character
+from .forms import gmRollerForm
+from .models import red
+from .models import yellow
+from .models import green
+from .models import purple
+from .models import blue
+from .models import black
+from .models import dice
+
 # adds character index
 def characterIndex(request):
     #makes a list of characters
@@ -15,6 +24,16 @@ def characterIndex(request):
         'latest_character_list': latest_character_list,
     }
     return HttpResponse(template.render(context, request))
+
+def diceResults(request)
+    resultsList = diceResults.objects.order_by('id')[::-1]
+    template = loader.get_template('edge/results.html')
+    centext = {
+        'resultsList':resultsList,
+    }
+    return HttpResponse(template.render(context, request))
+
+
 
 #get character html form
 def getCharacter(request, character_id):
@@ -27,7 +46,7 @@ def getCharacter(request, character_id):
 
 def editCharacter(request, character_id):
     form = CharacterForm()
-    #commented out for now because it doesn't work
+    #If data was obtained using post then create a form instance
     if request.method == 'POST':
         form = CharacterForm(request.POST)
         #check if valid
@@ -37,38 +56,19 @@ def editCharacter(request, character_id):
         else:
             form = CharacterForm()
     return render(request, 'edge/edit.html', {'form': form})
-"""
-#add a weapon index
-def weaponIndex(request):
-    return HttpResponse("This is the weapons index")
 
-#add an armor index
-def armorIndex(request):
-    return HttpResponse("this is the armor index")"""
-
-#add a character view
-def characterView(request, character_id):
-    return HttpResponse("You're at the character view page")
-
-#add a character edit view
-def characterEdit(request, character_id):
-      #makes 404 error with exception handling
-    try:
-        character = Character.objects.get(pk=character_id)
-    except Character.DoesNotExist:
-        raise Http404("Character does not exist")
-    return render(request, 'edge/detail.html', {'character': character})
-
-#add a weapon view
-#def weaponView(request, weapon_id):
-#add a player view
-
-#add a armor view
-
-#add a gm view
-#def GMView(request
-#add a party view
-
-#add a dice roller view
 
 #add a gm dice roller view
+def gmRoller(request):
+    form = gmRollerForm
+    if request.method == 'POST':
+        form = gmRollerForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['aim'] == True
+                form.cleaned_data['boost'] = form.cleaned_data['boost'] + 1
+            theResults = diceResults(results = dice.aggregate(form.cleaned_data['charactersList'], form.cleaned_data['skillsList'], form.cleaned_data[diff], form.cleaned_data['reds'], form.cleaned_data['boost'], form.cleaned_data['setback']))
+            theResults.save()
+            return HttpResponseRedirect('edge/dice/results')
+        else:
+            form = gmRollerForm()
+    return render(request, 'edge/gmRoller.html', {'form': form})
