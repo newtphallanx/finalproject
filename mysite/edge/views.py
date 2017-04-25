@@ -64,7 +64,7 @@ def gmRoller(request):
     if request.method == 'POST':
         form = gmRollerForm(request.POST)
         if form.is_valid():
-            if form.cleaned_data['aim'] == True
+            if form.cleaned_data['aim'] == 'True':
                 form.cleaned_data['boost'] = form.cleaned_data['boost'] + 1
             theResults = diceResults(results = dice.aggregate(form.cleaned_data['charactersList'], form.cleaned_data['skillsList'], form.cleaned_data[diff], form.cleaned_data['reds'], form.cleaned_data['boost'], form.cleaned_data['setback']))
             theResults.save()
