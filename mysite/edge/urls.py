@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^characters/(?P<character_id>[0-9]+)/$', views.getCharacter, name='character'),
 
     #/edge/characters/id/edit = edit specific character
-    url(r'^characters/(?P<character_id>[0-9]+)/edit/$', views.editCharacter, name='edit')
+    url(r'^characters/(?P<character_id>[0-9]+)/edit/$', views.editCharacter, name='edit'),
 
     url(r'^characters/dice/gmroller', views.gmRoller, name = 'gmRoller'),
 
