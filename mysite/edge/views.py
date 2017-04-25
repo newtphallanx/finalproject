@@ -25,7 +25,7 @@ def characterIndex(request):
     }
     return HttpResponse(template.render(context, request))
 
-def diceResults(request)
+def diceResults(request):
     resultsList = diceResults.objects.order_by('id')[::-1]
     template = loader.get_template('edge/results.html')
     centext = {
